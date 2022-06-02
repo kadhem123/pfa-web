@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Products</title>
+    <link th:rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container-fluid text-center">
+    <div> <h1> Manage Products </h1></div>
+    <div class="m-2">
+        <a class="h3" th:href="@{/products/new}">Add new Product</a>
+    </div>
+    <div th:if="${message}" class="alert alert-success text-center">
+        [[${message}]]
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th> Id </th>
+                <th>Article</th>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Photo</th>
+                <th>Quantity in Stock </th>
+                <th>Cost </th>
+                <th>Actions </th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="product : ${listProducts}">
+                <tr>
+                    <td>[[${product.id}]]</td>
+                    <td>[[${product.name}]]</td>
+                    <td>[[${product.type}]]</td>
+                    <td>[[${product.description}]]</td>
+                    <td>[[${product.photo}]]</td>
+                    <td>[[${product.stock}]]</td>
+                    <td>[[${product.cost}]]</td>
+                    <td>
+                        <button type="button" class="btn btn:danger"><a class="h4 mr-3" th:href="@{'/products/edit/' + ${product.id}}">Edit</a></button>
+                        <button type="button" class="btn btn:info"><a class="h4 mr-3" th:href="@{'/products/delete/' + ${product.id}}">Delete</a></button>
+                    </td>
+                </tr>
+
+            </th:block>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

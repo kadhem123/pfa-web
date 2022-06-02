@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Manage Bills </title>
+    <link th:rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container-fluid text-center">
+    <div> <h1> Manage Bills </h1></div>
+    <div class="m-2">
+        <a class="h3" th:href="@{/factures/new}">Add new Bill</a>
+    </div>
+    <div th:if="${message}" class="alert alert-success text-center">
+        [[${message}]]
+    </div>
+    <div>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+            <tr>
+                <th> Id </th>
+                <th>Creation Date</th>
+                <th>Due Payment Date</th>
+                <th>Quantity </th>
+                <th>Total Amount</th>
+                <th>Actions </th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="fact : ${listFactures}">
+                <tr>
+                    <td>[[${fact.id}]]</td>
+                    <td>[[${fact.creation_DateTime}]]</td>
+                    <td>[[${fact.payment_Date}]]</td>
+                    <td>[[${fact.qte_art}]]</td>
+                    <td>[[${fact.total_price}]]</td>
+                    <td>
+                        <button type="button" class="btn btn:danger"><a class="h4 mr-3" th:href="@{'/factures/edit/' + ${fact.id}}">Edit</a></button>
+                        <button type="button" class="btn btn:info"><a class="h4 mr-3" th:href="@{'/factures/delete/' + ${fact.id}}">Delete</a></button>
+                    </td>
+                </tr>
+
+            </th:block>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>[[${pageTitle}]] </title>
+    <link th:rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script src="webjars/bootstrap/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="text-center"><h2> [[${pageTitle}]]</h2></div>
+
+    <form action="ProductForm.html" th:action="@{/products/save}" method="post" enctype="multipart/form-data" th:object="${product}" style="max-width: 500px; margin: 0 ">
+        <input type="hidden" th:field="*{id}">
+        <div class="border border-secondary rounded p-3">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label"> Name: </label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{name}" class="form_control" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label"> Type: </label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{type}" class="form_control" required >
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label"> Description: </label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{description}" class="form_control" required >
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Photo</label>
+                <div class="col-sm-8">
+                    <label>Photos: </label>
+                    <input type="file" name="image" accept="image/png, image/jpeg" />
+                </div>
+                <script>
+                    var loadFile = function(event) {
+                        var image = document.getElementById('output');
+                        image.src = URL.createObjectURL(event.target.files[0]);
+                    };
+                </script>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label"> Cost: </label>
+                <div class="col-sm-8">
+                    <input type="number" th:field="*{cost}" class="form_control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label"> Stock </label>
+                <div class="col-sm-8">
+                    <input type="number" th:field="*{stock}" class="form_control">
+                </div>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn:info"> Save </button>
+                <button type="button" class="btn btn:danger" onclick="cancelForm()"> Cancel </button>
+
+            </div>
+
+        </div>
+    </form>
+
+</div>
+<script type="text/javascript">
+    function cancelForm(){
+        window.location="${/products}";
+
+    }
+</script>
+
+</body>
+</html>

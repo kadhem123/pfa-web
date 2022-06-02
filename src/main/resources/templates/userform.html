@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>[[${pageTitle}]] </title>
+    <link th:rel="stylesheet" type="text/css" th:href="@{webjars/bootstrap/css/bootstrap.min.css}"/>
+
+</head>
+<body>
+<div class="container-fluid">
+    <div class="text-center"><h2> [[${pageTitle}]]</h2></div>
+
+    <form action="userform.html" th:action="@{/users/save}" method="post" th:object="${user}" style="max-width: 500px; margin: 0 ">
+        <input type="hidden" th:field="*{id}">
+        <div class="border border-secondary rounded p-3">
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label"> E-mail: </label>
+                <div class="col-sm-8">
+                    <input type="email" th:field="*{email}" class="form_control" required min-length="8" max-length="45">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label"> First Name: </label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{firstName}" class="form_control" required min-length="3" max-length="45">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label"> Last Name: </label>
+                <div class="col-sm-8">
+                    <input type="text" th:field="*{lastName}" class="form_control" required min-length="3" max-length="45">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label"> Password: </label>
+                <div class="col-sm-8">
+                    <input type="password" th:field="*{password}" class="form_control" required min-length="8" max-length="15">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label"> Phone number: </label>
+                <div class="col-sm-8">
+                    <input type="number" th:field="*{phoneNumber}" class="form_control" required >
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label"> Enabled: </label>
+                <div class="col-sm-8">
+                    <input type="checkbox" th:field="*{enabled}" class="form_control">
+                </div>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn:info"> Save </button>
+                <button type="button" class="btn btn:danger" onclick="cancelForm()"> Cancel </button>
+
+            </div>
+
+        </div>
+    </form>
+
+</div>
+<script type="text/javascript">
+    function cancelForm(){
+        window.location="${/users}";
+
+    }
+</script>
+</body>
+</html>
